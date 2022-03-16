@@ -16,4 +16,5 @@ shift x s
 encode :: [Char] -> Int -> [Char]
 encode string factor = [shift x factor | x <- string]
 
+decode :: [Char] -> Int -> [Char]
 decode string factor = encode string (- factor)

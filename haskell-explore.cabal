@@ -28,6 +28,7 @@ library
       CaesarCipher
       Lib
       ListComprehensions
+      ListComprehensionsExercises
       LuhnAlgorithm
       Quicksort
       RandomMath

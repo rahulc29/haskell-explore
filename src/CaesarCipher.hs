@@ -104,7 +104,7 @@ fromCasedString :: [(Char, Case)] -> [Char]
 fromCasedString str = [fromCasedChar x | x <- str]
 
 decipherCasedString :: [(Char, Case)] -> [(Char, Case)]
-decipherCasedString casedString = zip chars cases where (chars, cases) = unzip casedString
+decipherCasedString casedString = zip (crackCaesar chars) cases where (chars, cases) = unzip casedString
 
 decipherCaesar :: [Char] -> [Char]
 decipherCaesar = fromCasedString . decipherCasedString . toCasedString

@@ -85,3 +85,26 @@ crackCaesar string = decode string factor
   where
     factor = head (positions chiTable (minimum chiTable))
     chiTable = frequencyTablesChi string
+
+data Case = Upper | Lower deriving (Show)
+
+toCasedChar :: Char -> (Char, Case)
+toCasedChar char
+  | isUpper char = (toLower char, Upper)
+  | otherwise = (char, Lower)
+
+fromCasedChar :: (Char, Case) -> Char
+fromCasedChar (char, Upper) = toUpper char
+fromCasedChar (char, Lower) = char
+
+toCasedString :: [Char] -> [(Char, Case)]
+toCasedString chs = [toCasedChar x | x <- chs]
+
+fromCasedString :: [(Char, Case)] -> [Char]
+fromCasedString str = [fromCasedChar x | x <- str]
+
+decipherCasedString :: [(Char, Case)] -> [(Char, Case)]
+decipherCasedString casedString = zip chars cases where (chars, cases) = unzip casedString
+
+decipherCaesar :: [Char] -> [Char]
+decipherCaesar = fromCasedString . decipherCasedString . toCasedString

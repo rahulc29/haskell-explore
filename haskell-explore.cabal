@@ -27,15 +27,16 @@ library
   exposed-modules:
       BinaryStringTransmitter
       CaesarCipher
-      HigherOrderFunctions
       Lib
       ListComprehensions
       ListComprehensionsExercises
       LuhnAlgorithm
+      PreferentialVotingAlgorithm
       Quicksort
       RandomMath
       Recursion
       TypesAndClasses
+      VotingAlgorithms
   other-modules:
       Paths_haskell_explore
   hs-source-dirs:

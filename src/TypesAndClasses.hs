@@ -17,25 +17,30 @@ safetailGuarded list | null list = []
 safetailPatterns []   = []
 safetailPatterns list = tail list
 
-data Nat = Zero | Succ Nat 
+data Nat = Zero | Succ Nat deriving Show
 
 nat2int :: Nat -> Int 
 nat2int Zero = 0 
-nat2int Succ x = 1 + nat2int x 
+nat2int (Succ x) = 1 + nat2int x 
 
 int2nat :: Int -> Nat
 int2nat x | x < 0 = undefined
           | x == 0 = Zero 
-          | otherwise = 1 + $ int2nat $ x - 1
+          | otherwise = Succ(int2nat (x - 1))
 
 add :: Nat -> Nat -> Nat 
 add Zero n = n 
 add (Succ m) n = Succ (add m n)
 
+mult Zero n = Zero
+mult (Succ Zero) n = n
+mult (Succ m) n = add (mult m n) n
+
 data Tree a = Leaf a | Node (Tree a) a (Tree a)
 
-occurs :: (Eq a) => a -> Tree a -> Bool
-occurs value (Leaf value') = value == value'
-occurs value (Node left value' right) = value == value' ||
-                                        occurs value left ||
-                                        occurs value right 
+occurs :: (Ord a) => a -> Tree a -> Bool 
+occurs value (Leaf value') = value == value' 
+occurs value (Node l v r) = occurs' value l v r (compare value v)
+                            where occurs' value l v r LT = occurs value l 
+                                  occurs' value l v r GT = occurs value r 
+                                  occurs' value l v r EQ = True

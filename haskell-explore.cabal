@@ -35,6 +35,7 @@ library
       Quicksort
       RandomMath
       Recursion
+      TautologyChecker
       TypesAndClasses
       VotingAlgorithms
   other-modules:
